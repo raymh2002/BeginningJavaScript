@@ -1,6 +1,7 @@
 // Write a function called isDivisibleBy3 which returns `true` if a number is
 // divisible by 3, and `false` otherwise.
-var isDivisibleBy3 = function () {
+var isDivisibleBy3 = function (number) {
+	return number % 3 === 0;
 };
 
 
@@ -10,10 +11,12 @@ var isDivisibleBy3 = function () {
 // convert the other way, you subtract 32, and then multiply by
 // 5. Finally, you divide by 9. The division operator in JavaScript is
 // `/`.
-var celsToFahr = function () {
+var celsToFahr = function (celciusTemp) {
+	return Fahr = (celciusTemp * 9 / 5) + 32;
 };
 
-var fahrToCels = function () {
+var fahrToCels = function (fahrTemp) {
+	return Celsius = (fahrTemp - 32) * 5 / 9; 
 };
 
 
@@ -31,13 +34,15 @@ var fahrToCels = function () {
 //
 //     randUpTo(1000);
 //     //=> 236
-var randUpTo = function () {
+var randUpTo = function (number) {
+	return Math.round(Math.random() * (number -1));
 };
 
 
 // Write a function called `randBetween` that accepts two numbers representing a
 // range and returns a random whole number between those two numbers.
-var randBetween = function () {
+var randBetween = function (min, max) {
+	return Math.round(Math.random() * ((max -1) - min) + min);
 };
 
 
@@ -56,7 +61,10 @@ var randBetween = function () {
 //
 //     isSuit("coins");
 //     //=> false
-var isSuit = function () {
+var isSuit = function (inputSuit) {
+	var test = inputSuit.toUpperCase();
+	return test === "CLUBS" || test === "DIAMONDS" || test === "HEARTS" || 
+	test === "SPADES"; 
 };
 
 
@@ -72,14 +80,20 @@ var isSuit = function () {
 //
 //     isRank("one");
 //     //=> false
-var isRank = function () {
+var isRank = function (inputRank) {
+	var test = inputRank.toLowerCase();
+	return test === "two" || test === "three" || test === "four" || 
+	test === "five" || test === "six" || test === "seven" || test === "eight" ||
+	test === "nine" || test === "ten" || test === "jack" || test === "queen" ||
+	test === "king" || test === "ace";
 };
 
 
 // Using the previous two functions, write a function called isCard that accepts
 // two arguments, a rank and a suit, and returns true if they are valid for a card,
 // and false otherwise.
-var isCard = function () {
+var isCard = function (inputRank, inputSuit) {
+	return isRank(inputRank) && isSuit(inputSuit);
 };
 
 
@@ -88,7 +102,9 @@ var isCard = function () {
 // Remember that you can use strings in comparisons in the same way that you can
 // use numbers, and the ordering is alphabetical (with capital letters having lower
 // values than their lower-case counterparts).
-var isCapitalized = function () {
+var isCapitalized = function (inputString) {
+	var capitalLetter = inputString.charAt(0).toUpperCase();
+	return inputString.charAt(0) === capitalLetter && capitalLetter >= "A" && capitalLetter <= "z";
 };
 
 
@@ -101,7 +117,11 @@ var isCapitalized = function () {
 //
 //     getHTMLText("<li>this is a list item</li>");
 //     //=> this is a list item
-var getHTMLText = function () {
+var getHTMLText = function (htmlElement) {
+	var startString = htmlElement.indexOf(">") + 1;
+	var endString = htmlElement.lastIndexOf("<");
+	var returnString = htmlElement.slice(startString, endString);
+	return returnString;
 };
 
 
@@ -122,5 +142,16 @@ var getHTMLText = function () {
 //
 // It may help in this case to look up the `lastIndexOf` method on the string
 // objects.
-var isHTMLElement = function () {
+var isHTMLElement = function (inputString) {
+	var startIndexOpenTag = inputString.indexOf("<");
+	var charOpenTag = inputString.charAt(startIndexOpenTag + 1);
+	var endIndexOpenTag = inputString.indexOf(">");
+	var startIndexCloseTag = inputString.indexOf("</");
+	var charCloseTag = inputString.charAt(startIndexCloseTag + 2);
+	var endIndexCloseTag = inputString.lastIndexOf(">");
+	var indexLastChar = inputString.length - 1;
+	return charOpenTag === charCloseTag && charOpenTag > "A" && charOpenTag < "z" 
+	&& charCloseTag > "A" && charCloseTag < "z" && startIndexOpenTag === 0 
+	&& startIndexOpenTag < endIndexOpenTag && endIndexOpenTag < startIndexCloseTag 
+	&& startIndexCloseTag < endIndexCloseTag && endIndexCloseTag === indexLastChar; 
 };

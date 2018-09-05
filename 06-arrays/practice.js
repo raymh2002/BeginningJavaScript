@@ -14,8 +14,26 @@
 //     containsTwice(10, [10, 10, 10, 10, 10]);
 //     //=> false
 //
-var containsTwice = function () {
+// var containsTwice = function () {
+// };
+
+var containsTwice = function (testValue, inputArray) {
+	var index = 0;
+	var length = inputArray.length;
+	var count = 0;
+	var test;
+
+	for (index; index < length; ++index) {
+		testElement = inputArray[index];
+		console.log(`count = ${count} index = ${index} testElement = ${testElement} testValue = ${testValue}`);
+		testElement === testValue ? ++count : count
+		console.log(`New Count =  ${count}`);
+	}
+		count === 2 ? test = true : test = false
+		return test;
 };
+
+
 
 
 // Generalize the previous solution into a function called `containsNTimes` so
@@ -30,8 +48,41 @@ var containsTwice = function () {
 //     containsNTimes(0, 5, [ 1, 2, 3, 4, 5 ]);
 //     //=> false
 //
-var containsNTimes = function () {
+// var containsNTimes = function () {
+// };
+
+// var containsNTimes = function (testCount, testValue, inputArray) {
+// 	var index = 0;
+// 	var length = inputArray.length;
+// 	var count = 0;
+// 	var test;
+
+// 	for (index; index < length; ++index) {
+// 		testElement = inputArray[index];
+// 		console.log(`count = ${count} index = ${index} testElement = ${testElement} testValue = ${testValue}`);
+// 		testElement === testValue ? ++count : count
+// 		console.log(`New Count =  ${count}`);
+// 	}
+// 		count === testCount ? test = true : test = false
+// 		return test;
+// };
+
+var containsNTimes = function (testCount, testValue, inputArray) {
+	var index = 0;
+	var length = inputArray.length;
+	var count = 0;
+	var test;
+
+	for (index; index < length; ++index) {
+		testElement = inputArray[index];
+		console.log(`count = ${count}  index = ${index}  testElement = ${testElement}  testValue = ${testValue}`);
+		testElement === testValue ? ++count : count
+		console.log(`New Count =  ${count}`);
+	}
+		count === testCount ? test = true : test = false
+		return test;
 };
+
 
 
 // Write a function called `atLeastOneEven` that returns `true` if at least one of
@@ -50,7 +101,25 @@ var containsNTimes = function () {
 //     atLeastOneEven("hello");
 //     //=> input should be an array!
 //
-var atLeastOneEven = function () {
+// var atLeastOneEven = function () {
+// };
+
+var atLeastOneEven = function (inputArray) {
+	var testValue = 2;
+	var test;
+	var index = 0;
+	var length = inputArray.length;
+
+	if (Array.isArray(inputArray) !== true) {
+		throw "This is not an array! Try again A-hole!";
+	}
+
+	for (index; index < length; ++index){
+		if (inputArray[index] % testValue === 0) {
+			return true
+		}
+	}
+	return false;
 };
 
 
@@ -70,7 +139,34 @@ var atLeastOneEven = function () {
 // Although the tests will not be checking for this, try to make your loop exit
 // as soon as it finds a non-string entry in the array.
 //
-var allStrings = function () {
+// var allStrings = function () {
+// };
+
+var allStrings = function (inputArray) {
+	var testArray = inputArray;
+	var index = 0;
+	var length = inputArray.length;
+	var testResult;
+
+	if (Array.isArray(testArray) !== true){
+		throw "This is not an array! Try again A-hole!"
+	}
+
+	console.log(` length = ${length}`)
+	console.log(` first element testArray =  ${testArray}`);
+	console.log(` typeof testElement =  ${typeof testArray[index]}`);
+
+	for (index; index <= length; ++index){
+		testElement = testArray[index];
+		if (typeof testElement === "string" || typeof testElement === "undefined"){
+			testResult = true;
+		
+		} else {
+			testResult = false;
+			return testResult;
+		}
+	}
+	return testResult;
 };
 
 
@@ -96,9 +192,58 @@ var allStrings = function () {
 // as soon as it finds an element in the first array that appears twice in the second
 // array.
 //
-var containsAnyTwice = function () {
-};
+// var containsAnyTwice = function () {
+// };
 
+// var containsAnyTwice = function (compareArray, targetArray) {
+	
+// 	if (Array.isArray(compareArray) === false || Array.isArray(targetArray) === false){
+// 		throw "One or both of these is not an array! Try again A-hole!"
+// 	}	
+
+// 	var indexCA = 0;
+// 	var lengthCA = compareArray.length;
+// 	var count = 0;
+
+// 	if (lengthCA === 0){
+// 		lengthCA = 1;
+// 	} 
+
+// 	for (indexCA; indexCA < lengthCA; ++indexCA){
+// 		var elementCA = compareArray[indexCA];
+// 		if (containsTwice(elementCA, targetArray) === true) { 
+// 				return true;
+// 			}
+// 	}
+// 	return false;
+// };
+
+var containsAnyTwice = function (compareArray, targetArray) {
+	if (Array.isArray(compareArray) === false || Array.isArray(targetArray) === false){
+		throw "One or both of these is not an array! Try again A-hole!"
+	}
+	var indexCA = 0;
+	var lengthCA = compareArray.length;
+	var count = 0;
+	var test = "no result";
+
+
+	if (lengthCA === 0){
+			lengthCA = 1;
+		} 
+
+		for (indexCA; indexCA < lengthCA; ++indexCA){
+			var elementCA = compareArray[indexCA];
+			var testForTwice = containsTwice(elementCA, targetArray);
+			if (testForTwice === true || test === true) { 
+					test = true;
+				} else if (testForTwice === false && test !== true) {
+					test = false;
+				}
+			console.log(`         Are there two elements of testValue= ${elementCA} in the targetArray ?   ${test}`);
+		}
+	return test;
+};
 
 // In the previous problem, we determined whether or not an array contains any
 // of a list of values exactly twice. In this problem, we'll actually return
@@ -125,8 +270,38 @@ var containsAnyTwice = function () {
 //     getValuesAppearingTwice(["hello", "world", "goodbye"])
 //     //=> []
 //
-var getValuesAppearingTwice = function () {
+// var getValuesAppearingTwice = function () {
+// };
+
+var getValuesAppearingTwice = function (inputArray) {
+	if (Array.isArray(inputArray) === false){
+		throw "This is not an array! Try again A-hole!"
+	}
+	var index = 0;
+	var inputLength = inputArray.length;
+	var rtnArr = [];
+	var rtnIndex = 0;
+	var rtnCount = 0;
+
+	var testCount = 2;
+
+
+	if (inputLength < 1) {
+		return rtnArr;
+	} 
+
+	for (index; index < inputLength; ++index){
+		var testElement1 = inputArray[index];
+		var testRtnElement = rtnArr[rtnIndex];
+		if ((testElement1 !== testRtnElement) && (containsNTimes(testCount, testElement1, inputArray) ===  true)) {
+			rtnArr.push(testElement1);
+			++rtnCount;
+			rtnCount > 1 ? ++rtnIndex : rtnIndex
+		} 
+	}
+	return rtnArr;
 };
+
 
 
 // Using a standard `for` loop, along with the `push` function, write a function

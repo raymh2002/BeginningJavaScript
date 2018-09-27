@@ -8,8 +8,12 @@
 //      reverse([ "hello", "world" ]);
 //      //=> [ "world", "hello" ]
 //
-var reverse = function () {
-};
+// var reverse = function () {
+// };
+const reverse = inputArray => inputArray.reduce((all, item, index, arr) => {
+	all.unshift(item);
+	return all;
+     }, []);
 
 // Did you know that you could have arrays within arrays? This is perfectly
 // legal JavaScript:
@@ -39,8 +43,12 @@ var reverse = function () {
 //
 // You'll also want to use the `concat` method to make this work.
 //
-var flatten = function () {
-};
+// var flatten = function () {
+// };
+
+const flatten = inputArray => inputArray.reduce((all, item, index, array) => all.concat(item), []);
+
+
 
 // Using `range` and a chain of array methods, write a function that accepts a
 // number `n` and returns the sum of all of the positive multiples of 3 and 5 that
@@ -55,8 +63,32 @@ var flatten = function () {
 //     sumOfMultiplesOf3And5(0);
 //     //=> 0
 //
-var sumOfMultiplesOf3And5 = function () {
+// var sumOfMultiplesOf3And5 = function () {
+// };
+
+const sumOfMultiplesOf3And5 = inputNumber => range(0, inputNumber).reduce((all, item, index, array) => {
+	return (item <= inputNumber && (item % 3 === 0  || item % 5 === 0)) ? all += item : all }, 0);
+
+const range = function (begin, end) {
+	if (typeof begin !== "number" || typeof end !== "number"){
+		throw "One or both of your inputs are not numbers. Try again A-hole."
+	}
+
+	let index = begin;
+	let rtnArray = [];
+
+	if (begin > end) { 
+		for (index; index >= end; --index) {
+			rtnArray.push(index);
+		}	
+	} else {
+		for (index; index <= end; ++index) {
+			rtnArray.push(index);
+		}
+	}
+	return rtnArray;
 };
+
 
 // Write a function called atLeastOneVowel that accepts a string and
 // returns true if that word contains at least one vowel. Do not use a
@@ -71,8 +103,19 @@ var sumOfMultiplesOf3And5 = function () {
 //     atLeastOneVowel("sdfjkl");
 //     //=> false
 //
-var atLeastOneVowel = function () {
-};
+// var atLeastOneVowel = function () {
+// };
+
+// const atLeastOneVowel = inputString => inputString.toLowerCase().split("").some((element) => {
+// 	return (element === "a" || element === "e" || element === "i" || element === "o" || element === "u"); 
+// });
+
+const atLeastOneVowel = inputString => inputString.toLowerCase().split("").some((element) => {
+		let vowels = ["a", "e", "i", "o", "u"]
+		return vowels.some((vowel) => {
+		return vowel === element;
+	}); 
+});
 
 // Write a function that accepts a list of tweets, and returns the
 // longest tweet that contains the word `awesome` or the empty string
@@ -84,8 +127,14 @@ var atLeastOneVowel = function () {
 //     longestAwesomeTweet([ "hello", "world" ]);
 //     //=> ""
 //
-var longestAwesomeTweet = function () {
-};
+// var longestAwesomeTweet = function () {
+// };
+
+const longestAwesomeTweet = tweetArray => tweetArray.reduce((all, item, index, array) => {
+	return ((item.indexOf("awesome") !== -1) && (item.length > all.length)) ? all = item : all;
+}, "");
+
+
 
 // Write a function that accepts an array of HTMLElements and returns an
 // array of their content.
@@ -96,8 +145,17 @@ var longestAwesomeTweet = function () {
 //     elementsToContent([ "<h1>This is an important heading!</h1>", "<h5>this is not as important</h5>" ]);
 //     //=> [ "This is an important heading!", "this is not as important" ]
 //
-var elementsToContent = function () {
-};
+// var elementsToContent = function () {
+// };
+
+const elementsToContent = arrayHTMLElements => arrayHTMLElements.reduce((all, item, index, array) => {
+	let beginElementString = item.toString().indexOf(">") + 1;
+	let endElementString = item.toString().lastIndexOf("<");
+	all.push(item.toString().slice(beginElementString, endElementString));
+	return all;
+}, []);
+
+
 
 // In a previous section, we created a function called `randUpTo` that
 // returned a random integer up to an upper bound. Using that function
@@ -112,7 +170,15 @@ var elementsToContent = function () {
 //     randomArray(5, 10);
 //     //=> [ 2, 0, 3, 9, 10 ]
 //
-var randomArray = function () {
+// var randomArray = function () {
+// };
+
+const randomArray = (arraySize, maxValue) => {
+	let randomArray = Array(arraySize).fill("");
+		return randomArray.reduce((all, item, index, array) => {
+			all.push(Math.round(Math.random() * (maxValue -1)));
+			return all;
+		}, []);
 };
 
 // Using the `randomNums` function from above, write a function called
@@ -126,5 +192,14 @@ var randomArray = function () {
 // randomElements([ "clubs", "diamonds", "hearts", "spades" ], 3);
 // //=> [ "hearts", "diamonds", "hearts" ]
 //
-var randomElements = function () {
+// var randomElements = function () {
+// };
+
+const randomElements = (inputArray, arraySize) => {
+	let randomArray = Array(arraySize).fill("");
+	let maxValue = inputArray.length;
+		return randomArray.reduce((all, item, index, array) => {
+			all.push(inputArray[(Math.round(Math.random() * (maxValue -1)))]);
+			return all;
+		}, []);
 };

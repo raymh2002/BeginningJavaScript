@@ -15,7 +15,12 @@
 //     isUser({ "age": 37, "name":"Semmy Purewal", "screen_name":"semmypurewal" });
 //     //=> false
 //
-var isUser = function () {
+// var isUser = function () {
+// };
+
+const isUser = inputObject => {
+	const array = Object.keys(inputObject);
+	return (array.length === 2 && array[0] === "name" && array[1] === "screen_name") 
 };
 
 
@@ -33,7 +38,17 @@ var isUser = function () {
 // Write this function. It should throw an error if the user is not a valid
 // user. It might be helpful to use some functions from previous sections.
 //
-var userToDiv = function () {
+// var userToDiv = function () {
+// };
+
+const userToDiv = user => {
+	if (isUser(user)) {
+		userArray = Object.values(user);
+		rtnElement = `<div><h1>${userArray[0]}</h1><h2>${userArray[1]}</h2></div>`;
+	} else {
+		throw "This is not a valid user! Try again A-hole!";
+	}
+	return rtnElement
 };
 
 
